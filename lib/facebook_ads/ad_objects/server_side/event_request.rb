@@ -143,7 +143,7 @@ module FacebookAds
       end
 
       # Execute request
-      def execute
+      def execute(session: nil)
         unless valid?
           raise list_invalid_properties
         end
@@ -154,6 +154,7 @@ module FacebookAds
         params = get_params()
         params[:data] = normalize
         ads_pixel = FacebookAds::AdsPixel.get(pixel_id)
+        ads_pixel.session = session if session
         response = ads_pixel.events.create(params)
         json_response_object = JSON.parse(JSON.generate(response), object_class: OpenStruct)
         FacebookAds::ServerSide::EventResponse.new(
