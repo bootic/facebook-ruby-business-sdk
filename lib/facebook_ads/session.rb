@@ -17,6 +17,7 @@
 # CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 require 'faraday'
+require 'faraday/net_http_persistent'
 require 'openssl'
 require 'logger'
 require 'facebook_ads/videos/video_request'
@@ -66,7 +67,8 @@ module FacebookAds
         faraday.request  :url_encoded
 
         faraday.response :logger, Utils.logger, bodies: FacebookAds.config.log_api_bodies
-        faraday.adapter  Faraday.default_adapter
+        # faraday.adapter  Faraday.default_adapter
+        faraday_adapter :net_http_persistent
       end
     end
 
