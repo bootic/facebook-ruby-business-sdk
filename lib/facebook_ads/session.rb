@@ -61,14 +61,14 @@ module FacebookAds
     def api_conn
       @api_conn ||= Faraday.new(url: api_base_path) do |faraday|
         faraday.use FacebookAds::HTTPService::VideoRequest
-        faraday.request  :multipart
+        # faraday.request  :multipart
         # TODO Json Request
         # TODO URL Encode - stringify json
         faraday.request  :url_encoded
 
         faraday.response :logger, Utils.logger, bodies: FacebookAds.config.log_api_bodies
         # faraday.adapter  Faraday.default_adapter
-        faraday_adapter :net_http_persistent
+        faraday.adapter :net_http_persistent
       end
     end
 
