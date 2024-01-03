@@ -16,10 +16,10 @@
 # IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 # CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-require 'composite_io' # from multipart-post
+require 'multipart/post'
 
 module FacebookAds
-  class VideoIO < ::UploadIO
+  class VideoIO < ::Multipart::Post::UploadIO
     def is_video?
       true
     end
